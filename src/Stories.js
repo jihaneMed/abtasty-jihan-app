@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { DESTINATIONS } from "./constants";
+import { Link } from "react-router-dom";
 
 function Stories() {
-  const [stories, setStories] = useState([]);
-
-  useEffect(() => {
-    fetch("https://news-proxy-server.appspot.com/topstories")
-      .then(response => response.json())
-      .then(json => setStories(json));
-  }, []);
 
   return (
     <div className="Stories">
-      <h3>Random News of The Day</h3>
-      {stories.map(story => {
-        const { id, by, time, title, url } = story;
+      <h3>Top Destinations</h3>
+      {DESTINATIONS.map(story => {
+        const { id, image, title } = story;
         return (
           <div key={id}>
-            <a href={url}>{title}</a>
+            <img src={image} alt={title} />
             <div>
-              {by} - {new Date(time * 1000).toLocaleString()}
+              {title}
             </div>
+            <Link to='/booking'>
+              <button type='button'>Go To Booking</button>
+            </Link>
           </div>
         );
       })}

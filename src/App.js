@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Stories from "./Stories";
+import { BrowserRouter, Route } from "react-router-dom/cjs/react-router-dom.min";
+import Booking from "./Booking";
 
 function App() {
   const [userQuery, setUserQuery] = useState("");
@@ -19,20 +21,27 @@ function App() {
     window.open(`https://google.com/search?q=${userQuery}`, "_blank");
   };
   return (
-    <div className="App">
-      <h1>Hello Jihan, What's on your mind ?</h1>
-      <div className="form">
-        <input
-          value={userQuery}
-          onChange={updateUserQuery}
-          onKeyPress={handleKeyPress}
-        />
-        <button onClick={searchQuery}>Search</button>
+    <BrowserRouter>
+     <Route exact path="/">
+     <div className="App">
+        <h1>Hello Jihan, What's on your mind ?</h1>
+        <div className="form">
+          <input
+            value={userQuery}
+            onChange={updateUserQuery}
+            onKeyPress={handleKeyPress}
+          />
+          <button onClick={searchQuery}>Search</button>
+        </div>
+        <hr />
+        <hr />
+        <Stories />
       </div>
-      <hr />
-      <hr />
-      <Stories />
-    </div>
+     </Route>
+     <Route  path='/booking'  >
+       <Booking/>
+     </Route>
+    </BrowserRouter>
   );
 }
 export default App;
