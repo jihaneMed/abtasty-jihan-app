@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { DESTINATIONS } from "./constants";
 import { Link } from "react-router-dom";
+import flagship from "@flagship.io/js-sdk";
 
 function Stories() {
+
+  const [fsVisitor, setFsVisitor] = useState(null);
+  const [customBtnData, setCustomBtnData] = useState({});
+
+
+  useEffect(() => {
+    const fsSdk = flagship.start('bkabbarggr1dtrcs8gq0', { fetchNow: true, enableConsoleLogs: true });
+  
+    const visitorInstance = fsSdk.newVisitor('test-perf', {
+      screenMode: 'light',
+    });
+  
+    visitorInstance.on('ready', () => {
+      setFsVisitor(visitorInstance);
+    });
+  }, []);
+
+  useEffect(
+    () => {
+      if (fsVisitor) {
+        const data = fsVisitor.getModifications([
+          {
+            key: 'color',
+            defaultValue: '#fff',
+          },
+          {
+            key: 'borderColor',
+            defaultValue: '#007bff',
+          },
+          {
+            key: 'backgroundColor',
+            defaultValue: '#007bff',
+          },
+        ], true)
+        setCustomBtnData(data);
+      }
+    }, [fsVisitor],
+  );
 
   return (
     <div className="Stories">
@@ -16,7 +55,29 @@ function Stories() {
               {title}
             </div>
             <Link to='/booking'>
-              <button type='button'>Go To Booking</button>
+              <button 
+              type='button' 
+              style={
+                {
+                  color: customBtnData.color,
+                  backgroundColor: customBtnData.backgroundColor,
+                  borderColor: customBtnData.borderColor,
+                }
+              }
+              onClick={() => {
+                if (fsVisitor) {
+                  const eventPayload = {
+                    category: 'Action Tracking',
+                    action: 'clickOnBasketButton',
+                  };
+                  fsVisitor.sendHits([
+                    {
+                      type: 'Event',
+                      data: eventPayload,
+                    },
+                  ]);
+                }
+              }}>Go To Booking</button>
             </Link>
           </div>
         );
