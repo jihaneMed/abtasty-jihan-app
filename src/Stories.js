@@ -67,8 +67,24 @@ function Stories() {
               onClick={() => {
                 if (fsVisitor) {
                   const eventPayload = {
+                    transactionId: '123456789',
+                    affiliation: 'travels',
+                  };
+                  fsVisitor.sendHits([
+                    {
+                      type: 'Transaction',
+                      data: eventPayload,
+                    },
+                  ]);
+                }
+              }}>Go To Booking</button>
+            </Link>
+            <button type='button' onClick= {() => 
+              {
+                if (fsVisitor) {
+                  const eventPayload = {
                     category: 'Action Tracking',
-                    action: 'clickOnBasketButton',
+                    action: 'clickOnTrackButton',
                   };
                   fsVisitor.sendHits([
                     {
@@ -77,8 +93,8 @@ function Stories() {
                     },
                   ]);
                 }
-              }}>Go To Booking</button>
-            </Link>
+              }
+            } > Track click</button>
           </div>
         );
       })}
