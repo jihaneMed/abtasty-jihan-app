@@ -16,6 +16,28 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script type="text/javascript" src="https://try.abtasty.com/6ed19461e16b80b95015e463c9b6a103.js"></script>
+    <script>
+      const transId = Math.round(Math.random()*100000).toString();
+        window.abtasty.send("transaction", { 
+            tid: transId,
+            ta: "checkoutId",
+            pm: "paypal",
+            sm: "relais colis",
+            tc: "EUR",
+            tr: 1150,
+            icn: 1,
+        });
+        window.abtasty.send("item", {
+            tid: transId,
+            ic: "Code1",
+            in: "Séjour",
+            iv: "CAT1",
+            iq: 1,
+            ip: 1000,
+        });
+        // Declare ABTastyProductKey variable
+        window.ABTastyProductKey = "NYX_168";
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
