@@ -12,15 +12,16 @@ function Booking() {
             pm: "paypal",
             sm: "relais colis",
             tc: "EUR",
-            tr: parseInt($('#price').text()),
+            tr: 1150,
+            icn: 1,
         });
         window.abtasty.send("item", {
             tid: transId,
             ic: "Code1",
             in: "Séjour",
             iv: "CAT1",
-            iq: parseInt($('#travellers').val()),
-            ip: parseInt($('#price').text()),
+            iq: 1,
+            ip: 1000,
         });
     }, []);
 
