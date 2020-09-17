@@ -10,7 +10,7 @@ function Stories() {
 
 
   useEffect(() => {
-    const fsSdk = flagship.start('bt8hh5f5m260vv56h2q0','r6674zHW5Fa3HXBlTvoscaF4dEnje0zT8NjLuZjm', { fetchNow: true, enableConsoleLogs: true });
+    const fsSdk = flagship.start('bt8hh5f5m260vv56h2q0', { fetchNow: true, enableConsoleLogs: true });
   
     const visitorInstance = fsSdk.newVisitor('test-perf', {
       screenMode: 'light',
