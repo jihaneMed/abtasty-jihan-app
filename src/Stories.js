@@ -68,7 +68,7 @@ function Stories() {
                 if (fsVisitor) {
                   const eventPayload = {
                     transactionId: '123456789',
-                    affiliation: 'travels',
+                    affiliation: 'Purchase',
                   };
                   fsVisitor.sendHits([
                     {
